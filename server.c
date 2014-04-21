@@ -12,9 +12,24 @@
 #include<netdb.h> //gethostbyname
 
 int sock_fd = -1, conn_fd = -1;
-
+/**
+ * Find a file in server filesystem
+ * @param filename Filename/filepath to search for
+ * @param buf Buffer to put response
+ */
 void find(const char*filename, char*buf);
+/**
+ * Get filetype from a stat struct
+ * @param s Stat struct
+ * @return filetype
+ */
 char*fileType(const struct stat*s);
+/**
+ * Write data to file...overwrites same filenames
+ * @param data Data to write
+ * @param filename Filename
+ * @param buf Buffer to place response
+ */
 void saveFile(const char*data, const char*filename, char*buf);
 
 int main(int argc, char** argv) {

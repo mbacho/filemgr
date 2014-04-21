@@ -3,10 +3,33 @@
 
 int sock_fd = -1;
 
+/**
+ * Show usage of client file
+ */
 void usage(char*prog_name);
+/**
+ * Find file in server 
+ * @param hostname hostname/ip of server
+ * @param filename filename to find
+ */
 void sendFind(const char*hostname, const char*filename);
+/**
+ * Send file to server
+ * @param hostname hostname/ip of server
+ * @param filepath filepath of file to send
+ */
 void sendFile(const char*hostname, const char*filepath);
+/**
+ * Handle cmdline options
+ * @param argc Number of options
+ * @param argv Options 
+ */
 void checkOpts(int argc, char**argv);
+/**
+ * Extract filename from filepath
+ * @param filepath Filepath to extract from
+ * @param buf Buffer to place extracted filename
+ */
 void getFilename(const char*filepath, char*buf);
 
 int main(int argc, char** argv) {

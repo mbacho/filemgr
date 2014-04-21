@@ -4,7 +4,6 @@
 int sock_fd = -1;
 
 void usage(char*prog_name);
-void putfile(const char*filepath, const char*outputfile);
 void sendFind(const char*hostname, const char*filename);
 void sendFile(const char*hostname, const char*filepath);
 void checkOpts(int argc, char**argv);

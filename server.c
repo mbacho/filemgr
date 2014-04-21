@@ -13,9 +13,7 @@
 
 int sock_fd = -1, conn_fd = -1;
 
-void putfile(const char*filepath, const char*outputfile);
 void find(const char*filename, char*buf);
-char*fileType(const struct stat*s);
 void saveFile(const char*data, const char*filename, char*buf);
 
 int main(int argc, char** argv) {
@@ -119,7 +117,10 @@ void find(const char*filename, char*buf) {
     snprintf(last_modified, sizeof (created) - 1, "%i", (int) result->st_mtim.tv_sec);
     memset(buf, '\0', BUF_MAX);
     snprintf(buf, BUF_MAX - 1, "filepath: /%s\nsize : %i bytes\ncreated : %s\nlast modified : %s\ntype : %s\n",
-            filename, (int) result->st_size, created, last_modified, fileType(result));
+            filename, (int) result->st_size,
+            created,
+            last_modified,
+            S_ISDIR(result->st_mode) ? "folder" : "file");
     strcat(buf, "File Permissions: ");
     strcat(buf, (S_ISDIR(result->st_mode)) ? "d" : "-");
     strcat(buf, (result->st_mode & S_IRUSR) ? "r" : "-");
@@ -138,7 +139,4 @@ void find(const char*filename, char*buf) {
     free(result);
 }
 
-char*fileType(const struct stat*s) {
-    return "folder/file";
-}
 

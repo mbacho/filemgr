@@ -55,7 +55,14 @@ int main(int argc, char** argv) {
                 if (msg[0] == CHECK_FIND) {
                     find(++msg_ptr, ans);
                 } else if (msg[0] == SAVE_FILE) {
-                    saveFile(++msg_ptr, "filename", ans);
+                    char*last_sep = strchr(++msg_ptr, '\n');
+                    if (last_sep != NULL) {
+                        char filename[MAX_FILNAME_SIZE];
+                        strncpy(filename, msg_ptr, last_sep - msg_ptr);
+                        saveFile(++last_sep, filename, ans);
+                    } else {
+                        strcpy(ans, "filename not specified");
+                    }
                 } else {
                     strcpy(ans, "action not specified");
                     printf(ans);
@@ -86,7 +93,9 @@ void saveFile(const char*data, const char*filename, char*buf) {
     FILE*fd = fopen(filename, "wb");
     fputs(data, fd);
     fclose(fd);
-    chdir("..");
+    chdir(UP_FOLDER);
+    strcpy(buf, "written to ");
+    strcat(buf, filename);
 }
 
 void find(const char*filename, char*buf) {
@@ -125,7 +134,7 @@ void find(const char*filename, char*buf) {
     strcat(buf, "\n");
 
     printf(buf);
-    chdir("..");
+    chdir(UP_FOLDER);
     free(result);
 }
 

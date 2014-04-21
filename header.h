@@ -14,14 +14,14 @@ extern "C" {
 
 
 #include<string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <getopt.h>
-#include <errno.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/stat.h>
+#include<getopt.h>
+#include<errno.h>
 #include<unistd.h>
-#include <sys/types.h> //types e.g. uint
-#include <sys/socket.h>  //accept,recv,socket,bind,connect,send...
+#include<sys/types.h> //types e.g. uint
+#include<sys/socket.h>  //accept,recv,socket,bind,connect,send...
 #include<netinet/in.h> //sockaddr data structures(netinet/in.h)
 #include<arpa/inet.h>//inet_pton,....
 #include<signal.h>
@@ -34,10 +34,11 @@ extern "C" {
 #define SAVE_FILE '2'
 #define MAX_FILNAME_SIZE 255
 #define FILE_SEPARATOR  '/'
+#define UP_FOLDER ".."
 #define ROOT_FOLDER  "filesystem"
 #define FILE_NOT_FOUND "404"
 
-void cleanup(int); //does cleanup after catching signals
+    void cleanup(int); //does cleanup after catching signals
 #ifdef	__cplusplus
 }
 #endif

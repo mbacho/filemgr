@@ -24,8 +24,6 @@ void sendFile(const char*hostname, const char*filepath) {
         fprintf(stderr, "file open error : ");
         return;
     }
-    strncat(msg,filepath, FILENAME_MAX);
-    strcat(msg, "\n");
     int rc = 0;
     while (((rc = fgetc(fd)) != EOF) && (strlen(msg) < BUF_MAX - 3)) {
         msg[(int) strlen(msg)] = (char) rc;

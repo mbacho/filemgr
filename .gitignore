@@ -4,3 +4,4 @@ Makefile
 nbproject
 server
 main.c
+filesystem/*

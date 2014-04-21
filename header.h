@@ -33,11 +33,10 @@ extern "C" {
 #define CHECK_FIND '1'
 #define SAVE_FILE '2'
 #define MAX_FILNAME_SIZE 255
+#define FILE_SEPARATOR  '/'
+#define ROOT_FOLDER  "filesystem"
+#define FILE_NOT_FOUND "404"
 
-const char*ROOT_FOLDER = "filesystem";
-const char*FILE_NOT_FOUND ="404";
-const char SEPERATOR = '/';
-const int MAX_FILENAME_LENGTH = 255;
 void cleanup(int); //does cleanup after catching signals
 #ifdef	__cplusplus
 }

@@ -8,6 +8,7 @@ void putfile(const char*filepath, const char*outputfile);
 void sendFind(const char*hostname, const char*filename);
 void sendFile(const char*hostname, const char*filepath);
 void checkOpts(int argc, char**argv);
+void getFilename(const char*filepath, char*buf);
 
 int main(int argc, char** argv) {
     signal(SIGINT, cleanup);
@@ -24,6 +25,10 @@ void sendFile(const char*hostname, const char*filepath) {
         fprintf(stderr, "file open error : ");
         return;
     }
+    char filename[FILENAME_MAX];
+    getFilename(filepath, filename);
+    strncat(msg, filename, FILENAME_MAX);
+    strcat(msg, "\n");
     int rc = 0;
     while (((rc = fgetc(fd)) != EOF) && (strlen(msg) < BUF_MAX - 3)) {
         msg[(int) strlen(msg)] = (char) rc;
@@ -155,3 +160,13 @@ void usage(char*prog_name) {
     printf("command : put => put shit\n");
     exit(0);
 }
+
+void getFilename(const char*filepath, char*buf) {
+    char*last_sep = strrchr(filepath, FILE_SEPARATOR);
+    if (last_sep == NULL) {
+        strncpy(buf, filepath, MAX_FILNAME_SIZE - 2);
+    } else {
+        strncpy(buf, ++last_sep, MAX_FILNAME_SIZE - 2);
+    }
+}
+
